@@ -33,7 +33,8 @@
           "enableFTS": true,
           "useSQLCipher": true
         }
-      ]
+      ],
+      "expo-router"
     ]
   }
 }
