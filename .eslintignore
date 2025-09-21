@@ -1,0 +1,11 @@
+node_modules/**
+dist/
+build/
+coverage/
+*.config.js
+metro.config.js
+babel.config.js
+.eslintrc.js
+.prettierrc.js
+.lintstagedrc.js
+.commitlintrc.js
