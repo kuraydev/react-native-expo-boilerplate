@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import 'expo-sqlite/localStorage/install'
 
 export default function App() {
   return (
