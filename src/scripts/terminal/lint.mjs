@@ -2,6 +2,9 @@ import { exec } from 'child_process';
 import chalk from 'chalk';
 import ora from 'ora';
 
+// Clear npm output lines (the "> package@version script" lines)
+process.stdout.write('\x1b[1A\x1b[K');
+
 const spinner = ora(chalk.magenta('Linting code...')).start();
 spinner.color = 'magenta';
 
