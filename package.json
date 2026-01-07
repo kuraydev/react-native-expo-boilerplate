@@ -12,7 +12,8 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
     "lint": "node ./src/scripts/terminal/lint.mjs",
-    "format": "node ./src/scripts/terminal/prettier.mjs"
+    "format": "node ./src/scripts/terminal/prettier.mjs",
+    "push": "node ./src/scripts/terminal/push.mjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
