@@ -1,14 +1,15 @@
-import { execSync } from "child_process";
+import { exec } from 'child_process';
+import chalk from 'chalk';
+import ora from 'ora';
 
-console.log("Formatting code...");
+const spinner = ora(chalk.cyan('Formatting code...')).start();
+spinner.color = 'cyan';
 
-try {
-  execSync(
-    'npx prettier --write "app/**/*.{ts,tsx}" "src/**/*.{ts,tsx,json}"',
-    { stdio: "inherit" },
-  );
-  console.log("Code formatted successfully!");
-} catch {
-  console.error("An error occurred while running Prettier.");
-  process.exit(1);
-}
+exec('npx prettier --write "app/**/*.{ts,tsx}" "src/**/*.{ts,tsx,json}"', (error, stdout, stderr) => {
+  if (error) {
+    spinner.fail(chalk.bgRed(`Prettier error: ${stderr}`));
+    process.exit(1);
+  } else {
+    spinner.succeed(chalk.cyanBright('Code formatted successfully!'));
+  }
+});
