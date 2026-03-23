@@ -1,0 +1,32 @@
+---
+description: React Native and Expo conventions for this project
+globs: ["**/*.tsx", "**/*.ts"]
+alwaysApply: false
+---
+
+# React Native + Expo Conventions
+
+## Component Structure
+- Use functional components with TypeScript interfaces for props
+- Export components as named exports from `src/components/ui/`
+- Screen components are default exports in the `app/` directory (Expo Router)
+
+## Expo Router
+- Screens live in `app/` as files — the filename becomes the route
+- Layouts use `_layout.tsx` files
+- Tab routes go in `app/(tabs)/`
+- Use `expo-router` Link and router for navigation, not React Navigation APIs
+
+## Theming
+- Always use `ThemedText` and `ThemedView` instead of raw `Text` and `View`
+- Get theme colors via `useThemeColor()` hook — returns the full color palette
+- Never hardcode color hex values in components
+
+## Imports
+- Use relative imports from `src/` in app/ files (e.g., `../../src/components/ui/ThemedText`)
+- Use relative imports within `src/` (e.g., `../constants/Colors`)
+
+## Performance
+- `react-native-reanimated/plugin` must be the LAST plugin in babel.config.js
+- Use `ScrollView` with `showsVerticalScrollIndicator={false}` for scrollable content
+- Prefer `StyleSheet.create()` for static styles

@@ -1,0 +1,37 @@
+---
+description: Styling and theming approach
+globs: ["**/*.tsx"]
+alwaysApply: false
+---
+
+# Styling & Theming
+
+## Color System
+All colors are defined in `src/constants/Colors.ts` with `light` and `dark` variants:
+- `text`, `textSecondary` — Primary and secondary text
+- `background`, `backgroundSecondary` — Main and card/section backgrounds
+- `tint` — Accent/brand color
+- `border`, `icon`, `danger`, `success` — Semantic colors
+
+## Using Colors in Components
+```typescript
+import { useThemeColor } from "../hooks/useThemeColor";
+
+function MyComponent() {
+  const colors = useThemeColor();
+  return <View style={{ backgroundColor: colors.background }} />;
+}
+```
+
+Or use themed wrappers: `ThemedView`, `ThemedText`, `Card`, `Button`.
+
+## Layout Constants
+Use `src/constants/Layout.ts` for consistent spacing:
+- `Layout.spacing.xs` (4) through `Layout.spacing.xxl` (48)
+- `Layout.borderRadius.sm` (6) through `Layout.borderRadius.full` (9999)
+- `Layout.fontSize.xs` (12) through `Layout.fontSize.title` (34)
+
+## Rules
+- Always use `StyleSheet.create()` — never inline style objects
+- Use `StyleSheet.hairlineWidth` for thin borders
+- Gap property is supported in RN 0.83+

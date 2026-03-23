@@ -1,0 +1,45 @@
+---
+description: Project structure and file organization
+alwaysApply: true
+---
+
+# Project Structure
+
+## Directory Layout
+```
+app/                        — Expo Router screens (file = route)
+  _layout.tsx               — Root layout (splash, fonts, theme hydration)
+  (tabs)/_layout.tsx        — Tab bar config (4 tabs)
+  (tabs)/index.tsx          — Home — Boilerplate Explorer showcase
+  (tabs)/search.tsx         — Search — categories, trending, recent
+  (tabs)/notifications.tsx  — Notifications — today/earlier with unread dots
+  (tabs)/settings.tsx       — Settings — grouped sections with app info
+
+src/                        — Shared application code
+  components/ui/            — Reusable UI components (ThemedText, Button, Card)
+  constants/                — Design tokens (Colors, Layout)
+  hooks/                    — Custom React hooks (useThemeColor)
+  i18n/                     — i18next + locales (en.json, es.json)
+  screens/home/             — Home screen components and mock data
+  services/api.ts           — HTTP client
+  services/zustand/         — State management (store, slices, types)
+  types/                    — Shared types and interfaces
+```
+
+## Where to Put Things
+- **New screen**: Add file in `app/` or `app/(tabs)/`
+- **New component**: `src/components/ui/`
+- **New hook**: `src/hooks/`
+- **New state**: `src/services/zustand/slices/` + update types and index
+- **New translations**: `src/i18n/locales/en.json` and `es.json`
+- **New types**: `src/types/` for shared, colocate domain types with their slice
+- **Screen-specific components**: `src/screens/<name>/components/`
+- **Mock data**: `src/screens/<name>/mock/`
+
+## Naming
+- Screen files: lowercase (`settings.tsx`, `notifications.tsx`)
+- Components: PascalCase (`ThemedText.tsx`, `Button.tsx`, `CardItem.tsx`)
+- Hooks: camelCase with `use` prefix (`useThemeColor.ts`)
+- Constants: PascalCase (`Colors.ts`, `Layout.ts`)
+- Zustand slices: camelCase with `Slice` suffix (`appSlice.ts`)
+- Mock data: PascalCase (`MockData.ts`)

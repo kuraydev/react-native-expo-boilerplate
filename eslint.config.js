@@ -10,13 +10,14 @@ module.exports = [
       "**/node_modules/**",
       "**/dist/**",
       "**/build/**",
+      "**/.expo/**",
       "**/*.config.js",
-      "**/metro.config.js",
-      "**/babel.config.js",
+      "**/*.mjs",
+      "**/*.mdc",
     ],
   },
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["app/**/*.{ts,tsx}", "src/**/*.{ts,tsx}"],
     plugins: {
       "@typescript-eslint": typescript,
       react: react,
@@ -26,17 +27,13 @@ module.exports = [
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: 2021,
+        ecmaFeatures: { jsx: true },
+        ecmaVersion: "latest",
         sourceType: "module",
       },
     },
     settings: {
-      react: {
-        version: "detect",
-      },
+      react: { version: "detect" },
     },
     rules: {
       ...typescript.configs.recommended.rules,
@@ -46,16 +43,11 @@ module.exports = [
       "react/prop-types": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-namespace": ["error", { allowDeclarations: true }],
       "react-native/no-inline-styles": "warn",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "@typescript-eslint/no-require-imports": "off",
-      "@typescript-eslint/no-namespace": [
-        "error",
-        {
-          allowDeclarations: true,
-        },
-      ],
     },
   },
 ];

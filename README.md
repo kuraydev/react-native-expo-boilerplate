@@ -1,188 +1,197 @@
 # React Native Expo Zustand Boilerplate
 
-A modern, feature-rich boilerplate for React Native applications using Expo, TypeScript, and Zustand for state management. This boilerplate provides a solid foundation for building scalable mobile applications with best practices and commonly used features.
+A modern, AI-ready boilerplate for React Native applications using Expo SDK 55, TypeScript, Zustand, and Expo Router. Start building production-quality mobile apps with best practices baked in.
 
-## 🌟 Features
+> **AI-Ready.** This repo ships with purpose-built guidance files so Cursor, Claude Code, GitHub Copilot, Windsurf, and Gemini CLI all understand the project conventions out of the box.
 
-- 📱 **Expo SDK** - Latest version for rapid development
-- 🎨 **TypeScript** - For type safety and better developer experience
-- 🔄 **Zustand** - Simple and scalable state management
-- 🌍 **i18n** - Internationalization support (English & Spanish included)
-- 🎯 **React Navigation** - Tab and Stack navigation preconfigured
-- 🌓 **Dark Mode** - Full dark mode support with persistence
-- 💫 **Reanimated** - For smooth animations
-- 🔤 **Vector Icons** - Ready to use icon set
-- 🔌 **Axios** - Configured HTTP client
-- 💾 **AsyncStorage** - Persistent storage setup
-- 🎨 **Clean Architecture** - Well-organized project structure
-- 🔍 **Code Quality Tools**:
-    - ESLint for code linting
-    - Prettier for code formatting
-    - Husky for Git hooks
-    - commitlint for commit message linting
+| File | Used by |
+|------|---------|
+| `CLAUDE.md` | Claude Code |
+| `AGENTS.md` | Windsurf, Codex CLI, Gemini CLI |
+| `.cursor/rules/` | Cursor |
+| `.github/copilot-instructions.md` | GitHub Copilot |
 
-## 📱 Screenshots
+> **Note:** All screens, components, and mock data included in this boilerplate are **for demonstration purposes only**. They showcase the architecture, theming, navigation, and state management — not to be kept as-is. Feel free to delete any screen or mock data and replace with your own.
 
-[Add your screenshots here]
+## Features
 
-## 🚀 Quick Start
+- **Expo SDK 55** — React Native 0.83 with New Architecture
+- **TypeScript** — Strict mode for type safety
+- **Expo Router** — File-based routing with typed navigation
+- **Zustand** — Lightweight state management with slice pattern
+- **i18n** — Internationalization with i18next (English and Spanish)
+- **Dark Mode** — Full theme support with persistence via AsyncStorage
+- **Reanimated** — Smooth animations with react-native-reanimated v4
+- **Axios** — Configured HTTP client with interceptors
+- **AI-Ready** — CLAUDE.md, AGENTS.md, and .cursor/rules included
+- **Code Quality** — ESLint 9, Prettier, Husky, and commitlint
+
+## Showcase
+
+The boilerplate includes 4 demo screens that showcase every built-in feature:
+
+| Home | Search | Notifications | Settings |
+|------|--------|---------------|----------|
+| Boilerplate Explorer with feature cards, utilities grid, and tech stack list | Category chips, trending list, recent searches | Today/earlier sections with unread notification dots | Grouped settings with app info card and danger zone |
+
+## Quick Start
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org) (v14 or newer)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/workflow/expo-cli/)
+- [Node.js](https://nodejs.org) v20.19 or newer
+- [npm](https://www.npmjs.com/)
+- [Expo CLI](https://docs.expo.dev/get-started/set-up-your-environment/)
 
 ### Installation
 
-1. Clone the repository:
-
 ```bash
-git clone https://github.com/yourusername/react-native-expo-zustand-boilerplate.git
-```
-
-2. Install dependencies:
-
-```bash
-cd react-native-expo-zustand-boilerplate
+git clone https://github.com/ArslanKathworStudios/react-native-typescript-zustand-expo-boilerplate.git
+cd react-native-typescript-zustand-expo-boilerplate
 npm install
 ```
 
-3. Start the development server:
+### Development
 
 ```bash
-npm start
+npm start          # Start Expo dev server
+npm run ios        # Start on iOS simulator
+npm run android    # Start on Android emulator
+npm run web        # Start web version
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-src/
-├── components/     # Reusable components
-├── navigation/     # Navigation configuration
-├── screens/        # Screen components
-├── services/
-│   ├── api/       # API services
-│   └── zustand/   # State management
-├── hooks/         # Custom hooks
-├── utils/         # Utility functions
-├── i18n/          # Internationalization
-└── assets/        # Images, fonts, etc.
+app/                            # Expo Router — screens and layouts
+  _layout.tsx                   # Root layout (splash, fonts, theme)
+  (tabs)/
+    _layout.tsx                 # Tab bar configuration (4 tabs)
+    index.tsx                   # Home — Boilerplate Explorer
+    search.tsx                  # Search — categories & trending
+    notifications.tsx           # Notifications — with unread dots
+    settings.tsx                # Settings — grouped sections
+
+src/                            # Shared application code
+  components/ui/                # Reusable themed components
+    Button.tsx                  # Themed button with variants
+    Card.tsx                    # Themed card container
+    ThemedText.tsx              # Theme-aware Text (title/heading/body/caption)
+    ThemedView.tsx              # Theme-aware View
+  constants/
+    Colors.ts                   # Centralized palette (light + dark)
+    Layout.ts                   # Spacing, border radius, font sizes
+  hooks/
+    useThemeColor.ts            # Hook for current theme colors
+  i18n/
+    index.ts                    # i18next initialization
+    locales/
+      en.json                   # English translations
+      es.json                   # Spanish translations
+  screens/home/
+    components/CardItem.tsx     # Horizontal feature card component
+    mock/MockData.ts            # Feature cards, utilities, tech stack data
+  services/
+    api.ts                      # Axios HTTP client
+    zustand/
+      index.ts                  # Combined store + selector hooks
+      types.ts                  # State type definitions
+      slices/
+        appSlice.ts             # App-wide state (theme, language)
+        userSlice.ts            # User state management
+  types/
+    index.ts                    # Shared TypeScript types
 ```
 
-## 🛠 State Management
+## State Management
 
-This boilerplate uses Zustand for state management. The store is organized into slices:
-
-- **App Slice**: Handles app-wide state (theme, language, online status)
-- **User Slice**: Manages user-related state
-
-Example usage:
+Zustand store is organized into slices:
 
 ```typescript
-import { useApp, useUser } from "@/services/zustand";
+import { useApp, useUser } from "../src/services/zustand";
 
-// In your component
-const { isDarkMode, toggleTheme } = useApp();
-const { user, updateUser } = useUser();
+const { isDarkMode, toggleTheme, language, setLanguage } = useApp();
+const { user, setUser, updateUser } = useUser();
 ```
 
-## 🌍 Internationalization
+## Theming
 
-Supports multiple languages using i18next. Easy to add new languages and translations.
+Colors are centralized in `src/constants/Colors.ts` with light and dark variants. Primary color is `#4A6CF7`.
+
+```typescript
+import { useThemeColor } from "../src/hooks/useThemeColor";
+
+function MyScreen() {
+  const colors = useThemeColor();
+  return (
+    <View style={{ backgroundColor: colors.card, shadowColor: colors.shadow }}>
+      <Text style={{ color: colors.text }}>Hello</Text>
+    </View>
+  );
+}
+```
+
+## Navigation
+
+Uses Expo Router with file-based routing. Add a new tab screen:
+
+```typescript
+// app/(tabs)/myscreen.tsx
+export default function MyScreen() {
+  return <ThemedView>...</ThemedView>;
+}
+```
+
+Then register in `app/(tabs)/_layout.tsx`.
+
+## Internationalization
+
+Translations in `src/i18n/locales/*.json`:
 
 ```typescript
 import { useTranslation } from "react-i18next";
 
-// In your component
 const { t } = useTranslation();
-console.log(t("home.welcome"));
+t("home.welcome");
 ```
 
-## 🎨 Theming
+## Scripts
 
-Includes a complete dark mode implementation that persists across app launches:
+| Script | Description |
+|--------|-------------|
+| `npm start` | Start Expo dev server |
+| `npm run ios` | Start on iOS simulator |
+| `npm run android` | Start on Android emulator |
+| `npm run web` | Start web version |
+| `npm run lint` | Run ESLint with auto-fix |
+| `npm run lint:check` | Run ESLint check only |
+| `npm run format` | Format with Prettier |
+| `npm run format:check` | Check formatting |
+| `npm run push` | Git push helper |
 
-- Consistent theme across all screens
-- Themed navigation elements
-- Automatic persistence
-- Easy to customize colors
+## Commit Convention
 
-## 📱 Navigation
-
-Uses React Navigation with a pre-configured stack and tab navigation structure:
-
-- Bottom tab navigation
-- Stack navigation for additional screens
-- Typed navigation using TypeScript
-
-## 🔧 Available Scripts
-
-- `npm start` - Start the Expo development server
-- `npm run android` - Start the Android app
-- `npm run ios` - Start the iOS app
-- `npm run web` - Start the web app
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
-- `npm run format` - Format code with Prettier
-
-## 💻 Development Tools
-
-### Code Quality
-
-- **ESLint**: JavaScript and TypeScript linting
-- **Prettier**: Code formatting
-- **Husky**: Git hooks for code quality
-- **commitlint**: Lint commit messages
-
-### Commit Message Convention
-
-This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification. Commit messages should be structured as follows:
+Follows [Conventional Commits](https://www.conventionalcommits.org/). Validated by commitlint via Husky.
 
 ```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
+feat: add user authentication
+fix: resolve dark mode toggle persistence
+docs: update README with new architecture
+refactor: extract theme colors to constants
 ```
 
-Types include:
+## Dependencies
 
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation only changes
-- `style`: Changes that do not affect the meaning of the code
-- `refactor`: Code change that neither fixes a bug nor adds a feature
-- `perf`: Code change that improves performance
-- `test`: Adding missing tests or correcting existing tests
-- `build`: Changes that affect the build system or external dependencies
-- `ci`: Changes to CI configuration files and scripts
-- `chore`: Other changes that don't modify src or test files
+| Package | Version |
+|---------|---------|
+| expo | 55.x |
+| react | 19.2 |
+| react-native | 0.83 |
+| expo-router | 55.x |
+| zustand | 5.x |
+| i18next | 25.x |
+| axios | 1.x |
+| react-native-reanimated | 4.x |
 
-## 📦 Dependencies
+## License
 
-- @react-navigation/native
-- @react-navigation/bottom-tabs
-- @react-navigation/native-stack
-- zustand
-- i18next
-- react-i18next
-- @react-native-async-storage/async-storage
-- axios
-- react-native-reanimated
-- expo-splash-screen
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Expo](https://expo.dev/)
-- [React Navigation](https://reactnavigation.org/)
-- [Zustand](https://github.com/pmndrs/zustand)
+MIT — see [LICENSE](LICENSE) for details.

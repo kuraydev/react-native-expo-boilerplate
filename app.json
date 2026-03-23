@@ -2,11 +2,11 @@
   "expo": {
     "name": "react-native-expo-zustand-boilerplate",
     "slug": "react-native-expo-zustand-boilerplate",
-    "version": "1.0.0",
+    "version": "2.0.0",
+    "scheme": "boilerplate",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -22,7 +22,11 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

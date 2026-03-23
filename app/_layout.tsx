@@ -1,75 +1,79 @@
-import { useCallback, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { useEffect, useCallback, useRef } from "react";
+import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import RootNavigator from "./src/navigation/RootNavigator";
-import "./src/i18n";
-import { useApp } from "./src/services/zustand";
+import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useApp } from "../src/services/zustand";
+import { Colors } from "../src/constants/Colors";
+import "../src/i18n";
 
 SplashScreen.preventAutoHideAsync();
 
 const THEME_STORAGE_KEY = "@theme_mode";
 const LANGUAGE_STORAGE_KEY = "@language";
 
-export default function App() {
-  const { setInitialized, isDarkMode, setLanguage, toggleTheme } = useApp();
+export default function RootLayout() {
+  const { isDarkMode, setInitialized, setLanguage, toggleTheme } = useApp();
+  const hydrated = useRef(false);
 
   const [fontsLoaded] = useFonts({
     Ionicons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf"),
   });
 
   useEffect(() => {
-    async function loadInitialState() {
+    if (hydrated.current) return;
+    hydrated.current = true;
+
+    async function hydrate() {
       try {
-        // Load saved theme
         const savedTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY);
         if (savedTheme) {
           const isDark = JSON.parse(savedTheme);
           if (isDark !== isDarkMode) {
-            // Only toggle if different from default
             toggleTheme();
           }
         }
 
-        // Load saved language
         const savedLanguage = await AsyncStorage.getItem(LANGUAGE_STORAGE_KEY);
         if (savedLanguage) {
           setLanguage(savedLanguage);
         }
-
-        setInitialized(true);
       } catch (error) {
         console.error("Error loading initial state:", error);
+      } finally {
         setInitialized(true);
       }
     }
 
-    loadInitialState().catch(() => {
-      console.error("::Error loading initial state::");
-      setInitialized(true);
-    });
+    hydrate();
   }, [isDarkMode, setInitialized, setLanguage, toggleTheme]);
 
-  const onLayoutRootView = useCallback(async () => {
+  const onReady = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
+  useEffect(() => {
+    onReady();
+  }, [onReady]);
+
   if (!fontsLoaded) {
     return null;
   }
 
+  const colors = isDarkMode ? Colors.dark : Colors.light;
+
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <RootNavigator />
-    </View>
+    <>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: colors.background },
+        }}
+      />
+      <StatusBar style={isDarkMode ? "light" : "dark"} />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

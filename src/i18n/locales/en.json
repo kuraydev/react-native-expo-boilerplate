@@ -1,0 +1,31 @@
+{
+  "home": {
+    "welcome": "Welcome to the App!",
+    "greeting": "Hello, {{name}}!",
+    "subtitle": "A modern React Native boilerplate powered by Expo, TypeScript, and Zustand."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "darkMode": "Dark Mode",
+    "appearance": "Appearance",
+    "appVersion": "App Version",
+    "about": "About"
+  },
+  "search": {
+    "title": "Search",
+    "subtitle": "Explore docs, components & guides",
+    "placeholder": "Search anything…"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "unreadCount": "You have {{count}} unread notifications"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading..."
+  }
+}

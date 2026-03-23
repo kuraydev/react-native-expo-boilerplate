@@ -1,0 +1,39 @@
+---
+description: Zustand state management patterns
+globs: ["src/services/zustand/**"]
+alwaysApply: false
+---
+
+# Zustand Store Patterns
+
+## Slice Pattern
+Each domain has its own slice file in `src/services/zustand/slices/`:
+
+```typescript
+import { StateCreator } from "zustand";
+import { MyState } from "../types";
+
+export const createMySlice: StateCreator<MyState> = (set, get) => ({
+  // Initial state
+  myValue: null,
+
+  // Actions
+  setMyValue: (value) => set({ myValue: value }),
+});
+```
+
+## Adding a New Slice
+1. Define types in `src/services/zustand/types.ts`
+2. Create slice in `src/services/zustand/slices/`
+3. Add to combined store in `src/services/zustand/index.ts`
+4. Create a selector hook (e.g., `export const useMy = () => { ... }`)
+
+## Store Structure
+- Combined store merges all slices via `create<StoreState>()((...args) => ({ ...createSliceA(...args), ...createSliceB(...args) }))`
+- Selector hooks destructure only needed fields to minimize re-renders
+- AsyncStorage persistence is done manually in actions, not via middleware
+
+## Conventions
+- Prefix AsyncStorage keys with `@` (e.g., `@theme_mode`)
+- Keep actions in the slice, not in components
+- Use `get()` to read current state inside actions when needed

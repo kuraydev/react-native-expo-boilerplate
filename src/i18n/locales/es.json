@@ -1,0 +1,31 @@
+{
+  "home": {
+    "welcome": "¡Bienvenido a la App!",
+    "greeting": "¡Hola, {{name}}!",
+    "subtitle": "Un boilerplate moderno de React Native con Expo, TypeScript y Zustand."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "darkMode": "Modo Oscuro",
+    "appearance": "Apariencia",
+    "appVersion": "Versión de la App",
+    "about": "Acerca de"
+  },
+  "search": {
+    "title": "Buscar",
+    "subtitle": "Explora docs, componentes y guías",
+    "placeholder": "Buscar cualquier cosa…"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "markAllRead": "Marcar todo como leído",
+    "unreadCount": "Tienes {{count}} notificaciones sin leer"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "loading": "Cargando..."
+  }
+}

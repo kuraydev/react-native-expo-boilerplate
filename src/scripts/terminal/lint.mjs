@@ -1,22 +1,13 @@
-import { exec } from 'child_process';
-import chalk from 'chalk';
-import ora from 'ora';
+import { execSync } from "child_process";
 
-// Clear npm output lines (the "> package@version script" lines)
-process.stdout.write('\x1b[1A\x1b[K');
+console.log("Linting code...");
 
-const spinner = ora(chalk.magenta('Linting code...')).start();
-spinner.color = 'magenta';
-
-// Adjust the ESLint command and glob pattern as needed for your project.
-exec('npx eslint "src/**/*.{js,ts,tsx}" --fix', (error, stdout, stderr) => {
-  // Clear the spinner line before outputting the final message.
-  process.stdout.write('\r\x1b[K');
-
-  if (error) {
-    spinner.fail(chalk.bgRed(`ESLint error: ${stderr || stdout}`));
-    process.exit(1);
-  } else {
-    spinner.succeed(chalk.magentaBright('Code linted successfully!'));
-  }
-});
+try {
+  execSync('npx eslint "app/**/*.{ts,tsx}" "src/**/*.{ts,tsx}" --fix', {
+    stdio: "inherit",
+  });
+  console.log("Code linted successfully!");
+} catch {
+  console.error("ESLint found issues that need to be fixed.");
+  process.exit(1);
+}
