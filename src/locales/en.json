@@ -1,0 +1,15 @@
+{
+  "common": {
+    "appName": "React Native Expo Boilerplate",
+    "loading": "Loading…",
+    "retry": "Retry",
+    "error": "Something went wrong"
+  },
+  "home": {
+    "title": "Home",
+    "welcome": "Welcome to your new app"
+  },
+  "explore": {
+    "title": "Explore"
+  }
+}
