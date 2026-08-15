@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits"],
+  "schedule": ["before 8am on monday"],
+  "packageRules": [
+    {
+      "groupName": "Expo SDK",
+      "matchPackageNames": ["expo", "expo-*", "@expo/*", "babel-preset-expo", "jest-expo"]
+    },
+    {
+      "groupName": "React Native core",
+      "matchPackageNames": ["react", "react-dom", "react-native", "react-native-*", "@types/react"]
+    },
+    {
+      "groupName": "dev tooling",
+      "matchDepTypes": ["devDependencies"]
+    }
+  ],
+  "rangeStrategy": "bump",
+  "prConcurrentLimit": 3
+}

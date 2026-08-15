@@ -1,188 +1,97 @@
-# React Native Expo Zustand Boilerplate
+# React Native Expo Boilerplate
 
-A modern, feature-rich boilerplate for React Native applications using Expo, TypeScript, and Zustand for state management. This boilerplate provides a solid foundation for building scalable mobile applications with best practices and commonly used features.
+[![Expo SDK](https://img.shields.io/badge/Expo-SDK%2057-000020?style=for-the-badge&logo=expo)](https://docs.expo.dev/versions/v57.0.0/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.86-61dafb?style=for-the-badge&logo=react)](https://reactnative.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## 🌟 Features
+Production-grade Expo starter with the decisions already made — routing, data,
+state, theming, i18n, testing, EAS, and CI — so a new app is minutes away, not
+days.
 
-- 📱 **Expo SDK** - Latest version for rapid development
-- 🎨 **TypeScript** - For type safety and better developer experience
-- 🔄 **Zustand** - Simple and scalable state management
-- 🌍 **i18n** - Internationalization support (English & Spanish included)
-- 🎯 **React Navigation** - Tab and Stack navigation preconfigured
-- 🌓 **Dark Mode** - Full dark mode support with persistence
-- 💫 **Reanimated** - For smooth animations
-- 🔤 **Vector Icons** - Ready to use icon set
-- 🔌 **Axios** - Configured HTTP client
-- 💾 **AsyncStorage** - Persistent storage setup
-- 🎨 **Clean Architecture** - Well-organized project structure
-- 🔍 **Code Quality Tools**:
-    - ESLint for code linting
-    - Prettier for code formatting
-    - Husky for Git hooks
-    - commitlint for commit message linting
+## Stack
 
-## 📱 Screenshots
+| Concern | Choice |
+|---|---|
+| Navigation | [expo-router](https://docs.expo.dev/router/introduction/) (file-based, `src/app/`) |
+| Server state | [TanStack Query](https://tanstack.com/query) |
+| Client state | [zustand](https://zustand.docs.pmnd.rs) (persisted example included) |
+| HTTP | `fetch` wrapper with auth-header injection + normalized errors |
+| Styling | `StyleSheet` + swappable **theme packs** (light/dark built in) |
+| i18n | i18next + expo-localization |
+| Storage | expo-secure-store (secrets) / AsyncStorage (cache) |
+| Testing | jest-expo + React Native Testing Library + [Maestro](https://maestro.mobile.dev) smoke E2E |
+| Builds | EAS (dev / preview / production profiles) + OTA updates |
+| Quality | TypeScript strict, ESLint, Prettier, husky + commitlint, Renovate, GitHub Actions CI |
 
-[Add your screenshots here]
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org) (v14 or newer)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/workflow/expo-cli/)
-
-### Installation
-
-1. Clone the repository:
+## Quick start
 
 ```bash
-git clone https://github.com/yourusername/react-native-expo-zustand-boilerplate.git
-```
-
-2. Install dependencies:
-
-```bash
-cd react-native-expo-zustand-boilerplate
+git clone https://github.com/kuraydev/react-native-expo-boilerplate.git my-app
+cd my-app && rm -rf .git && git init
 npm install
+
+# Make it yours (renames app/slug/scheme, optional add-on libs):
+node scripts/bootstrap.mjs --name "My App" --slug my-app --extras
+
+# Wire EAS (project link, credentials, push checklist):
+npm run setup:eas
+
+npm run ios   # or android / web
 ```
 
-3. Start the development server:
+## Theming
 
-```bash
-npm start
+All colors live in **theme packs** (`src/theme/packs/`). A pack defines light +
+dark palettes over one typed shape. Restyle the entire app by adding a pack and
+switching one line in `src/theme/index.ts`:
+
+```ts
+export const activePack: ThemePack = myBrandPack;
 ```
 
-## 📁 Project Structure
+Components consume `useTheme()` for colors and static `Spacing` / `Radius` /
+`Fonts` tokens — no hex literals in components, ever.
+
+## Project layout
 
 ```
-src/
-├── components/     # Reusable components
-├── navigation/     # Navigation configuration
-├── screens/        # Screen components
-├── services/
-│   ├── api/       # API services
-│   └── zustand/   # State management
-├── hooks/         # Custom hooks
-├── utils/         # Utility functions
-├── i18n/          # Internationalization
-└── assets/        # Images, fonts, etc.
+src/app/              expo-router routes (thin — no business logic)
+src/components/       shared UI (incl. Bounceable, themed primitives)
+src/features/<name>/  feature code: components, hooks, queries co-located
+src/services/api/     fetch wrapper + endpoint functions
+src/store/            zustand stores (client state only)
+src/theme/            token packs + useTheme
+src/locales/          i18n resources (en.json is source of truth)
 ```
 
-## 🛠 State Management
+## Scripts
 
-This boilerplate uses Zustand for state management. The store is organized into slices:
+| Command | What |
+|---|---|
+| `npm run typecheck` / `lint` / `test` | the CI trio |
+| `npm run e2e` | Maestro smoke flow |
+| `npm run build:ios` / `build:android` | EAS production builds |
+| `npm run update:dev` / `preview` / `prod` | OTA updates per channel |
+| `node scripts/bootstrap.mjs` | rename app + optional extras |
+| `npm run setup:eas` | one-time EAS link + credentials |
 
-- **App Slice**: Handles app-wide state (theme, language, online status)
-- **User Slice**: Manages user-related state
+## AI-assistant ready
 
-Example usage:
+Ships with guidance files so coding agents follow the project conventions out
+of the box: [`CLAUDE.md`](./CLAUDE.md) (Claude Code) and [`AGENTS.md`](./AGENTS.md)
+(Codex CLI, Windsurf, Gemini CLI, …).
 
-```typescript
-import { useApp, useUser } from "@/services/zustand";
+## Optional add-ons
 
-// In your component
-const { isDarkMode, toggleTheme } = useApp();
-const { user, updateUser } = useUser();
-```
+Curated, actively maintained companion libraries (installable via
+`bootstrap.mjs --extras`):
 
-## 🌍 Internationalization
+- [react-native-bouncy-checkbox](https://github.com/WrathChaos/react-native-bouncy-checkbox)
+- [react-native-segmented-control-2](https://github.com/WrathChaos/react-native-segmented-control-2)
+- [react-native-modalkit](https://github.com/WrathChaos/react-native-modalkit)
+- [react-native-gradient-background-skia](https://github.com/WrathChaos/react-native-gradient-background-skia)
 
-Supports multiple languages using i18next. Easy to add new languages and translations.
+## License
 
-```typescript
-import { useTranslation } from "react-i18next";
-
-// In your component
-const { t } = useTranslation();
-console.log(t("home.welcome"));
-```
-
-## 🎨 Theming
-
-Includes a complete dark mode implementation that persists across app launches:
-
-- Consistent theme across all screens
-- Themed navigation elements
-- Automatic persistence
-- Easy to customize colors
-
-## 📱 Navigation
-
-Uses React Navigation with a pre-configured stack and tab navigation structure:
-
-- Bottom tab navigation
-- Stack navigation for additional screens
-- Typed navigation using TypeScript
-
-## 🔧 Available Scripts
-
-- `npm start` - Start the Expo development server
-- `npm run android` - Start the Android app
-- `npm run ios` - Start the iOS app
-- `npm run web` - Start the web app
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
-- `npm run format` - Format code with Prettier
-
-## 💻 Development Tools
-
-### Code Quality
-
-- **ESLint**: JavaScript and TypeScript linting
-- **Prettier**: Code formatting
-- **Husky**: Git hooks for code quality
-- **commitlint**: Lint commit messages
-
-### Commit Message Convention
-
-This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification. Commit messages should be structured as follows:
-
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-Types include:
-
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation only changes
-- `style`: Changes that do not affect the meaning of the code
-- `refactor`: Code change that neither fixes a bug nor adds a feature
-- `perf`: Code change that improves performance
-- `test`: Adding missing tests or correcting existing tests
-- `build`: Changes that affect the build system or external dependencies
-- `ci`: Changes to CI configuration files and scripts
-- `chore`: Other changes that don't modify src or test files
-
-## 📦 Dependencies
-
-- @react-navigation/native
-- @react-navigation/bottom-tabs
-- @react-navigation/native-stack
-- zustand
-- i18next
-- react-i18next
-- @react-native-async-storage/async-storage
-- axios
-- react-native-reanimated
-- expo-splash-screen
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Expo](https://expo.dev/)
-- [React Navigation](https://reactnavigation.org/)
-- [Zustand](https://github.com/pmndrs/zustand)
+MIT © Kuray Ogun
