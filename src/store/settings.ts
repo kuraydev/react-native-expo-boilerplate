@@ -1,12 +1,13 @@
 /**
- * Example zustand store: client-only state, persisted to AsyncStorage.
+ * Example zustand store: client-only state, persisted via MMKV.
  * Server data does NOT belong here — use TanStack Query for that.
- * Sensitive values (tokens) belong in expo-secure-store, not AsyncStorage.
+ * Sensitive values (tokens) belong in expo-secure-store, not MMKV.
  */
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+
+import { mmkvStorage } from '@/lib/storage';
 
 interface SettingsState {
   hapticsEnabled: boolean;
@@ -21,7 +22,7 @@ export const useSettings = create<SettingsState>()(
     }),
     {
       name: 'settings',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => mmkvStorage),
     },
   ),
 );

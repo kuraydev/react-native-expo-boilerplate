@@ -19,7 +19,7 @@ days.
 | HTTP | `fetch` wrapper with auth-header injection + normalized errors |
 | Styling | `StyleSheet` + swappable **theme packs** (light/dark built in) |
 | i18n | i18next + expo-localization |
-| Storage | expo-secure-store (secrets) / AsyncStorage (cache) |
+| Storage | [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) (cache/prefs) / expo-secure-store (secrets) |
 | Testing | jest-expo + React Native Testing Library + [Maestro](https://maestro.mobile.dev) smoke E2E |
 | Builds | EAS (dev / preview / production profiles) + OTA updates |
 | Quality | TypeScript strict, ESLint, Prettier, husky + commitlint, Renovate, GitHub Actions CI |

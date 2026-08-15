@@ -10,7 +10,7 @@ https://docs.expo.dev/versions/v57.0.0/ before writing native-adjacent code.
 - **Client state**: zustand, client-only concerns (session, prefs, UI state). Stores stay small. Example: `src/store/settings.ts`.
 - **Transport**: `fetch` via `src/services/api/client.ts` (base URL, auth headers, normalized `ApiError`). No axios.
 - **Styling**: `StyleSheet.create` + tokens from `src/theme/`. No styled-components / NativeWind / Unistyles.
-- **Storage**: `expo-secure-store` for tokens/secrets; AsyncStorage only for non-sensitive cache.
+- **Storage**: `react-native-mmkv` (`src/lib/storage.ts`) for all key-value cache/prefs — AsyncStorage is banned. `expo-secure-store` for tokens/secrets.
 - **i18n**: i18next. Every user-facing string via `t("group.key")`; keys live in `src/locales/en.json` (source of truth).
 
 ## Layout

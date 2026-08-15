@@ -1,6 +1,13 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const mockAsyncStorage = require('@react-native-async-storage/async-storage/jest/async-storage-mock');
-jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
+jest.mock('react-native-mmkv', () => {
+  const map = new Map();
+  return {
+    createMMKV: () => ({
+      set: (key, value) => map.set(key, value),
+      getString: (key) => map.get(key),
+      remove: (key) => map.delete(key),
+    }),
+  };
+});
 jest.mock('expo-secure-store', () => ({
   getItemAsync: jest.fn().mockResolvedValue(null),
   setItemAsync: jest.fn(),
