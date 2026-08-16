@@ -138,4 +138,4 @@ Curated, actively maintained companion libraries (installable via
 
 ## 📄 License
 
-MIT © [Kuray Ogun](https://github.com/kuraydev)
+MIT © [kuraydev](https://github.com/kuraydev)
