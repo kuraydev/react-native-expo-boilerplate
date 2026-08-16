@@ -1,5 +1,20 @@
 {
   "enabledPlugins": {
     "expo@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit*)",
+      "Bash(npm run typecheck*)",
+      "Bash(npm run lint*)",
+      "Bash(npm run verify*)",
+      "Bash(npm test*)",
+      "Bash(npx jest*)",
+      "Bash(npx expo lint*)",
+      "Bash(npx expo install*)",
+      "Bash(npx expo prebuild*)",
+      "Bash(node scripts/gen.mjs*)",
+      "Bash(node scripts/sync-ai-rules.mjs*)"
+    ]
   }
 }

@@ -52,8 +52,8 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
@@ -66,7 +66,10 @@
     "update:dev": "npx eas-cli@latest update --channel development --non-interactive",
     "update:preview": "npx eas-cli@latest update --channel preview --non-interactive",
     "update:prod": "npx eas-cli@latest update --channel production --non-interactive",
-    "e2e": "maestro test .maestro/smoke.yaml"
+    "e2e": "maestro test .maestro/smoke.yaml",
+    "verify": "tsc --noEmit && expo lint && jest --ci",
+    "gen": "node scripts/gen.mjs",
+    "sync:ai-rules": "node scripts/sync-ai-rules.mjs"
   },
   "private": true,
   "jest": {

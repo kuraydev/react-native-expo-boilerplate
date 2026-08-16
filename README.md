@@ -97,11 +97,34 @@ src/locales/          🌍 i18n resources (en.json is source of truth)
 | `node scripts/bootstrap.mjs` | 🏷️ rename app + optional extras |
 | `npm run setup:eas` | 🔑 one-time EAS link + credentials |
 
+## 🧠 AI features built in
+
+Provider-agnostic AI layer (`src/services/ai/`): one interface, adapters for
+**Anthropic Claude**, **OpenAI**, and **Google Gemini**, SSE streaming via
+`expo/fetch`, structured-output support, and a **production proxy transport**
+so provider API keys never ship in the app bundle. A streaming chat screen
+(`/chat` tab) demos it end to end.
+
+```bash
+# .env — development only (key is visible in the bundle!)
+EXPO_PUBLIC_AI_PROVIDER=anthropic
+EXPO_PUBLIC_AI_API_KEY=sk-ant-...
+
+# production: your backend holds the keys
+EXPO_PUBLIC_AI_PROVIDER=proxy
+EXPO_PUBLIC_AI_PROXY_URL=https://api.yourapp.com
+```
+
 ## 🤖 AI-assistant ready
 
-Ships with guidance files so coding agents follow the project conventions out
-of the box: [`CLAUDE.md`](./CLAUDE.md) (Claude Code) and [`AGENTS.md`](./AGENTS.md)
-(Codex CLI, Windsurf, Gemini CLI, …).
+Works out of the box with **Claude Code, Cursor, GitHub Copilot, Codex CLI,
+Windsurf, and Gemini CLI** — one source of truth ([`CLAUDE.md`](./CLAUDE.md))
+generates `AGENTS.md`, `.cursor/rules/`, and `.github/copilot-instructions.md`
+via `npm run sync:ai-rules`. Plus:
+
+- `npm run verify` — the one-shot check agents run after every change
+- `npm run gen screen <name>` / `gen feature <name>` — rule-conforming scaffolds
+- `.claude/settings.json` — pre-approved safe commands, fewer permission prompts
 
 ## 🧩 Optional add-ons
 
