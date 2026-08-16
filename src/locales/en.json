@@ -11,5 +11,13 @@
   },
   "explore": {
     "title": "Explore"
+  },
+  "chat": {
+    "title": "AI Chat",
+    "empty": "Ask anything to get started",
+    "placeholder": "Message…",
+    "send": "Send",
+    "thinking": "Thinking…",
+    "systemPrompt": "You are a helpful assistant inside a mobile app. Keep responses concise."
   }
 }

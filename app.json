@@ -8,7 +8,8 @@
     "scheme": "rnexpoboilerplate",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.wrathchaos.react-native-expo-boilerplate"
     },
     "android": {
       "adaptiveIcon": {

@@ -1,3 +1,5 @@
+<!-- GENERATED from CLAUDE.md by scripts/sync-ai-rules.mjs — edit CLAUDE.md instead. -->
+
 # React Native Expo Boilerplate
 
 Expo SDK 57 / React Native 0.86 / TypeScript strict. Read the versioned docs at
