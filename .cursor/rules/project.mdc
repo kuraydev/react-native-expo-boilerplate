@@ -51,7 +51,17 @@ src/locales/          # i18n resources
 ## Testing bar
 
 - jest-expo + React Native Testing Library, co-located `__tests__/`, `*.test.ts(x)`.
-- E2E: Maestro (`.maestro/smoke.yaml`) — keep the smoke flow green.
+- E2E & on-device verification: **Argent** (`@swmansion/argent`, MCP server wired in
+  `.mcp.json`). Maestro/Detox are banned — do not add them back.
+  - While developing, verify UI changes yourself on the simulator/emulator with the
+    Argent tools (tap, type, `describe`, screenshot) instead of assuming or asking —
+    use the `argent-test-ui-flow` / `argent-device-interact` skills.
+  - Regression E2E lives as recorded flows in `.argent/flows/*.yaml`. Author them by
+    live recording via the `argent-qa-flows` skill (never hand-write flow YAML);
+    the canonical smoke flow is `smoke`.
+  - Replay: `npm run e2e` (smoke) or `npx argent run flow-execute --name <flow>`.
+    A changed screen that breaks a flow gets the flow repaired (`argent-create-flow`
+    repair loop), not the assertion deleted.
 - New feature = at least one test for its core logic. No brittle snapshots.
 
 ## Guardrails

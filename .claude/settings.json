@@ -14,7 +14,8 @@
       "Bash(npx expo install*)",
       "Bash(npx expo prebuild*)",
       "Bash(node scripts/gen.mjs*)",
-      "Bash(node scripts/sync-ai-rules.mjs*)"
+      "Bash(node scripts/sync-ai-rules.mjs*)",
+      "mcp__argent"
     ]
   }
 }

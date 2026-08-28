@@ -1,6 +1,0 @@
-appId: ${MAESTRO_APP_ID}
----
-- launchApp
-- assertVisible: 'Home'
-- tapOn: 'Explore'
-- assertVisible: 'Explore'
