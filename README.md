@@ -36,7 +36,7 @@ not days**.
 | 🎨 Styling | `StyleSheet` + swappable **theme packs** (light/dark built in) |
 | 🌍 i18n | i18next + expo-localization |
 | ⚡ Storage | [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) (cache/prefs) / expo-secure-store (secrets) |
-| 🧪 Testing | jest-expo + React Native Testing Library + [Argent](https://github.com/software-mansion/argent) E2E (AI-agent driven, recorded flows) |
+| 🧪 Testing | jest-expo + React Native Testing Library + [Argent](https://github.com/software-mansion/argent) E2E (AI-agent driven, recorded flows) — [testing guide](docs/testing.md) |
 | 🚀 Builds | EAS (dev / preview / production profiles) + OTA updates |
 | 🛡️ Quality | TypeScript strict, ESLint, Prettier, husky + commitlint, Renovate, GitHub Actions CI |
 
@@ -91,7 +91,7 @@ src/locales/          🌍 i18n resources (en.json is source of truth)
 | Command | What |
 |---|---|
 | `npm run typecheck` / `lint` / `test` | ✅ the CI trio |
-| `npm run e2e` | 🧪 Argent smoke flow replay |
+| `npm run e2e` | 🧪 Argent smoke flow replay ([testing guide](docs/testing.md)) |
 | `npm run build:ios` / `build:android` | 🚀 EAS production builds |
 | `npm run update:dev` / `preview` / `prod` | 📡 OTA updates per channel |
 | `node scripts/bootstrap.mjs` | 🏷️ rename app + optional extras |

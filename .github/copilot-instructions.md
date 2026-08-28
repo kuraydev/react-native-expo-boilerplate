@@ -57,6 +57,7 @@ src/locales/          # i18n resources
   - Replay: `npm run e2e` (smoke) or `npx argent run flow-execute --name <flow>`.
     A changed screen that breaks a flow gets the flow repaired (`argent-create-flow`
     repair loop), not the assertion deleted.
+  - Full guide: `docs/testing.md`.
 - New feature = at least one test for its core logic. No brittle snapshots.
 
 ## Guardrails
