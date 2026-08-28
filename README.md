@@ -20,7 +20,7 @@ not days**.
 - 🎨 **Theme packs** — swappable light/dark token sets, zero hex in components
 - 🌍 **i18next** — every string through `t()`, device-locale aware
 - 🔐 **expo-secure-store** — secrets in the Keychain, never in JS storage
-- 🧪 **jest-expo + RNTL + Maestro** — unit, component, and E2E smoke tests
+- 🧪 **jest-expo + RNTL + Argent** — unit, component, and agent-driven E2E tests
 - 🚀 **EAS** — build profiles, OTA channels, one-command setup script
 - 🤖 **AI-assistant ready** — `CLAUDE.md` / `AGENTS.md` convention files
 - 🛡️ **Quality gates** — TS strict, ESLint, Prettier, husky, commitlint, Renovate, CI
@@ -36,7 +36,7 @@ not days**.
 | 🎨 Styling | `StyleSheet` + swappable **theme packs** (light/dark built in) |
 | 🌍 i18n | i18next + expo-localization |
 | ⚡ Storage | [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) (cache/prefs) / expo-secure-store (secrets) |
-| 🧪 Testing | jest-expo + React Native Testing Library + [Maestro](https://maestro.mobile.dev) smoke E2E |
+| 🧪 Testing | jest-expo + React Native Testing Library + [Argent](https://github.com/software-mansion/argent) E2E (AI-agent driven, recorded flows) |
 | 🚀 Builds | EAS (dev / preview / production profiles) + OTA updates |
 | 🛡️ Quality | TypeScript strict, ESLint, Prettier, husky + commitlint, Renovate, GitHub Actions CI |
 
@@ -91,7 +91,7 @@ src/locales/          🌍 i18n resources (en.json is source of truth)
 | Command | What |
 |---|---|
 | `npm run typecheck` / `lint` / `test` | ✅ the CI trio |
-| `npm run e2e` | 🧪 Maestro smoke flow |
+| `npm run e2e` | 🧪 Argent smoke flow replay |
 | `npm run build:ios` / `build:android` | 🚀 EAS production builds |
 | `npm run update:dev` / `preview` / `prod` | 📡 OTA updates per channel |
 | `node scripts/bootstrap.mjs` | 🏷️ rename app + optional extras |
