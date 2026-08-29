@@ -23,7 +23,7 @@ not days**.
 - 🧪 **jest-expo + RNTL + Argent** — unit, component, and agent-driven E2E tests
 - 🚀 **EAS** — build profiles, OTA channels, one-command setup script
 - 🤖 **AI-assistant ready** — `CLAUDE.md` / `AGENTS.md` convention files
-- 🛡️ **Quality gates** — TS strict, ESLint, Prettier, husky, commitlint, Renovate, CI
+- 🛡️ **Quality gates** — TS strict, oxlint, husky, commitlint, Renovate, CI
 
 ## 🧱 Stack
 
@@ -38,7 +38,7 @@ not days**.
 | ⚡ Storage | [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) (cache/prefs) / expo-secure-store (secrets) |
 | 🧪 Testing | jest-expo + React Native Testing Library + [Argent](https://github.com/software-mansion/argent) E2E (AI-agent driven, recorded flows) — [testing guide](docs/testing.md) |
 | 🚀 Builds | EAS (dev / preview / production profiles) + OTA updates |
-| 🛡️ Quality | TypeScript strict, ESLint, Prettier, husky + commitlint, Renovate, GitHub Actions CI |
+| 🛡️ Quality | TypeScript strict, oxlint, husky + commitlint, Renovate, GitHub Actions CI |
 
 ## 🚀 Quick start
 
