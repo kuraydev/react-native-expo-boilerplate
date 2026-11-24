@@ -2,7 +2,9 @@
 
 A modern, AI-ready boilerplate for React Native applications using Expo SDK 55, TypeScript, Zustand, and Expo Router. Start building production-quality mobile apps with best practices baked in.
 
-> **AI-Ready.** This repo ships with purpose-built guidance files so Cursor, Claude Code, GitHub Copilot, Windsurf, and Gemini CLI all understand the project conventions out of the box.
+## AI-Ready
+
+This repo ships with purpose-built guidance files so AI assistants understand the project conventions out of the box.
 
 | File | Used by |
 |------|---------|
@@ -11,11 +13,18 @@ A modern, AI-ready boilerplate for React Native applications using Expo SDK 55, 
 | `.cursor/rules/` | Cursor |
 | `.github/copilot-instructions.md` | GitHub Copilot |
 
-> **Note:** All screens, components, and mock data included in this boilerplate are **for demonstration purposes only**. They showcase the architecture, theming, navigation, and state management — not to be kept as-is. Feel free to delete any screen or mock data and replace with your own.
+Four Cursor rules are included:
+
+| Rule | Scope |
+|------|-------|
+| `project-structure.mdc` | Directory layout and naming conventions |
+| `react-native.mdc` | React Native & Expo patterns |
+| `zustand.mdc` | Zustand slice architecture |
+| `styling.mdc` | Theming and StyleSheet best practices |
 
 ## Features
 
-- **Expo SDK 55** — React Native 0.83 with New Architecture
+- **Expo SDK 55** — React Native 0.83 with mandatory New Architecture
 - **TypeScript** — Strict mode for type safety
 - **Expo Router** — File-based routing with typed navigation
 - **Zustand** — Lightweight state management with slice pattern
@@ -23,10 +32,13 @@ A modern, AI-ready boilerplate for React Native applications using Expo SDK 55, 
 - **Dark Mode** — Full theme support with persistence via AsyncStorage
 - **Reanimated** — Smooth animations with react-native-reanimated v4
 - **Axios** — Configured HTTP client with interceptors
-- **AI-Ready** — CLAUDE.md, AGENTS.md, and .cursor/rules included
-- **Code Quality** — ESLint 9, Prettier, Husky, and commitlint
+- **AI-Ready** — CLAUDE.md, AGENTS.md, .cursor/rules, and copilot-instructions
+- **Code Quality** — ESLint 9 (flat config), Prettier, Husky, and commitlint
+- **Setup Wizard** — Interactive CLI to personalize the boilerplate for your project
 
 ## Showcase
+
+> All screens, components, and mock data included in this boilerplate are **for demonstration purposes only**. They showcase the architecture, theming, navigation, and state management. Run `npm run setup` to optionally replace them with clean stubs.
 
 The boilerplate includes 4 demo screens that showcase every built-in feature:
 
@@ -50,6 +62,32 @@ cd react-native-typescript-zustand-expo-boilerplate
 npm install
 ```
 
+### Setup Wizard
+
+Run the interactive setup wizard to personalize the boilerplate for your project:
+
+```bash
+npm run setup
+```
+
+The wizard walks you through each step one by one:
+
+| # | Prompt | What it updates |
+|---|--------|-----------------|
+| 1 | **App name** | `app.json`, Settings screen, CLAUDE.md, AGENTS.md, README |
+| 2 | **Slug** | `package.json` name, `app.json` slug |
+| 3 | **Deep link scheme** | `app.json` scheme |
+| 4 | **Bundle ID** | iOS `bundleIdentifier` + Android `package` (optional) |
+| 5 | **Author name** | `package.json` author (optional) |
+| 6 | **App description** | `package.json` description (optional) |
+| 7 | **API base URL** | `src/services/api.ts` baseURL |
+| 8 | **Primary color** | `src/constants/Colors.ts`, CLAUDE.md, AGENTS.md |
+| 9 | **Default language** | `src/i18n/index.ts` (en or es) |
+| 10 | **Remove showcase** | Replace demo screens with clean stubs, delete mock data |
+| 11 | **Reinitialize Git** | Wipe boilerplate history, fresh first commit |
+
+After applying all changes, the wizard offers to **remove itself** from the project so it doesn't ship with your app.
+
 ### Development
 
 ```bash
@@ -62,49 +100,54 @@ npm run web        # Start web version
 ## Project Structure
 
 ```
-app/                            # Expo Router — screens and layouts
-  _layout.tsx                   # Root layout (splash, fonts, theme)
+app/                              # Expo Router — screens and layouts
+  _layout.tsx                     # Root layout (splash, fonts, theme hydration)
   (tabs)/
-    _layout.tsx                 # Tab bar configuration (4 tabs)
-    index.tsx                   # Home — Boilerplate Explorer
-    search.tsx                  # Search — categories & trending
-    notifications.tsx           # Notifications — with unread dots
-    settings.tsx                # Settings — grouped sections
+    _layout.tsx                   # Tab bar configuration (4 tabs)
+    index.tsx                     # Home — Boilerplate Explorer
+    search.tsx                    # Search — categories & trending
+    notifications.tsx             # Notifications — with unread dots
+    settings.tsx                  # Settings — grouped sections
 
-src/                            # Shared application code
-  components/ui/                # Reusable themed components
-    Button.tsx                  # Themed button with variants
-    Card.tsx                    # Themed card container
-    ThemedText.tsx              # Theme-aware Text (title/heading/body/caption)
-    ThemedView.tsx              # Theme-aware View
+src/                              # Shared application code
+  components/ui/
+    Button.tsx                    # Themed button with variants & loading state
+    Card.tsx                      # Themed card container with shadow
+    ThemedText.tsx                # Theme-aware Text (title/heading/body/caption)
+    ThemedView.tsx                # Theme-aware View
   constants/
-    Colors.ts                   # Centralized palette (light + dark)
-    Layout.ts                   # Spacing, border radius, font sizes
+    Colors.ts                     # Centralized palette (light + dark)
+    Layout.ts                     # Spacing, border radius, font sizes
   hooks/
-    useThemeColor.ts            # Hook for current theme colors
+    useThemeColor.ts              # Hook for current theme colors
   i18n/
-    index.ts                    # i18next initialization
+    index.ts                      # i18next initialization
     locales/
-      en.json                   # English translations
-      es.json                   # Spanish translations
+      en.json                     # English translations
+      es.json                     # Spanish translations
   screens/home/
-    components/CardItem.tsx     # Horizontal feature card component
-    mock/MockData.ts            # Feature cards, utilities, tech stack data
+    components/CardItem.tsx       # Horizontal feature card component
+    mock/MockData.ts              # Feature cards, utilities, tech stack data
+  scripts/terminal/
+    setup.mjs                     # Interactive project setup wizard
+    lint.mjs                      # ESLint runner with chalk & ora
+    prettier.mjs                  # Prettier runner with chalk & ora
+    push.mjs                      # Git push helper with chalk & ora
   services/
-    api.ts                      # Axios HTTP client
+    api.ts                        # Axios HTTP client with interceptors
     zustand/
-      index.ts                  # Combined store + selector hooks
-      types.ts                  # State type definitions
+      index.ts                    # Combined store + selector hooks
+      types.ts                    # State type definitions
       slices/
-        appSlice.ts             # App-wide state (theme, language)
-        userSlice.ts            # User state management
+        appSlice.ts               # App-wide state (theme, language)
+        userSlice.ts              # User state management
   types/
-    index.ts                    # Shared TypeScript types
+    index.ts                      # Shared TypeScript interfaces
 ```
 
 ## State Management
 
-Zustand store is organized into slices:
+Zustand store is organized into slices for scalability:
 
 ```typescript
 import { useApp, useUser } from "../src/services/zustand";
@@ -112,6 +155,8 @@ import { useApp, useUser } from "../src/services/zustand";
 const { isDarkMode, toggleTheme, language, setLanguage } = useApp();
 const { user, setUser, updateUser } = useUser();
 ```
+
+Add new slices in `src/services/zustand/slices/` and register them in `src/services/zustand/index.ts`.
 
 ## Theming
 
@@ -130,6 +175,8 @@ function MyScreen() {
 }
 ```
 
+Themed UI components (`ThemedText`, `ThemedView`, `Button`, `Card`) are in `src/components/ui/` and automatically adapt to the current theme.
+
 ## Navigation
 
 Uses Expo Router with file-based routing. Add a new tab screen:
@@ -141,11 +188,11 @@ export default function MyScreen() {
 }
 ```
 
-Then register in `app/(tabs)/_layout.tsx`.
+Then register the tab in `app/(tabs)/_layout.tsx`.
 
 ## Internationalization
 
-Translations in `src/i18n/locales/*.json`:
+Translations live in `src/i18n/locales/*.json` (English and Spanish included):
 
 ```typescript
 import { useTranslation } from "react-i18next";
@@ -154,7 +201,11 @@ const { t } = useTranslation();
 t("home.welcome");
 ```
 
+Add new languages by creating a new JSON file in `src/i18n/locales/` and registering it in `src/i18n/index.ts`.
+
 ## Scripts
+
+All custom scripts use `chalk` and `ora` for styled terminal output with spinners.
 
 | Script | Description |
 |--------|-------------|
@@ -162,15 +213,16 @@ t("home.welcome");
 | `npm run ios` | Start on iOS simulator |
 | `npm run android` | Start on Android emulator |
 | `npm run web` | Start web version |
-| `npm run lint` | Run ESLint with auto-fix |
+| `npm run setup` | Interactive project setup wizard |
+| `npm run lint` | Run ESLint with auto-fix (chalk + ora) |
 | `npm run lint:check` | Run ESLint check only |
-| `npm run format` | Format with Prettier |
+| `npm run format` | Format with Prettier (chalk + ora) |
 | `npm run format:check` | Check formatting |
-| `npm run push` | Git push helper |
+| `npm run push` | Git push helper (chalk + ora) |
 
 ## Commit Convention
 
-Follows [Conventional Commits](https://www.conventionalcommits.org/). Validated by commitlint via Husky.
+Follows [Conventional Commits](https://www.conventionalcommits.org/). Enforced by commitlint + Husky git hooks.
 
 ```
 feat: add user authentication
@@ -191,6 +243,16 @@ refactor: extract theme colors to constants
 | i18next | 25.x |
 | axios | 1.x |
 | react-native-reanimated | 4.x |
+| typescript | 5.9 |
+| eslint | 9.x |
+
+| Dev Tool | Version |
+|----------|---------|
+| chalk | 5.x |
+| ora | 9.x |
+| husky | 9.x |
+| commitlint | 20.x |
+| prettier | 3.x |
 
 ## License
 

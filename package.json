@@ -12,7 +12,8 @@
     "lint:check": "eslint app/ src/ --max-warnings=0",
     "format": "node ./src/scripts/terminal/prettier.mjs",
     "format:check": "prettier --check \"app/**/*.{ts,tsx}\" \"src/**/*.{ts,tsx,json}\"",
-    "push": "node ./src/scripts/terminal/push.mjs"
+    "push": "node ./src/scripts/terminal/push.mjs",
+    "setup": "node ./src/scripts/terminal/setup.mjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
